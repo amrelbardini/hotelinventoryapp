@@ -1,5 +1,6 @@
-import { Component, ViewChild, ViewContainerRef, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit,AfterViewInit {
 
   // @ViewChild('user',{read:ViewContainerRef}) vcr!:ViewContainerRef;
   @ViewChild('name',{read:ElementRef}) name!:ElementRef;
+
   ngOnInit():void{
 
   //we can't create the instance here due to component life cycle if the static property is false.
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit,AfterViewInit {
   ngAfterViewInit():void{
     // const componentRef=this.vcr.createComponent(RoomsComponent);
     const elementRef=this.name.nativeElement.innerText="Hotel Hilton";
+
   }
 };
 
