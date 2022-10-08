@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="container">
+  <p
+    class="props"
+    [ngStyle]="{ color: rooms.availableRooms ? 'green' : 'blue' }"
+  >
+    Welcome to {{ hotelName }}
+  </p>
+  <div [hidden]="hideRooms">
+    <p>No. of rooms</p>
+    <div [innerText]="numOfRooms"></div>
+  </div>
+  {{ rooms.availableRooms ?? "No rooms" }}
+  <!--If room.availableRooms exist or truthy render the elements below-->
+  <div *ngIf="rooms?.availableRooms">
+    <span> Number of available rooms: </span>
+    <span [innerText]="rooms.availableRooms"></span>
+  </div>
+  <div *ngIf="selectedRoom">
+    {{ selectedRoom | json }}
+  </div>
+  <!--roomslist component-->
+  <app-rooms-list
+    [rooms]="roomlist"
+    (selectedRoom)="selectRoom($event)"
+    [title]="title"
+  ></app-rooms-list>
+
+  <!--Event binding example-->
+  <button class="btn btn-primary m-2" (click)="toggle()">toggle</button>
+  <button class="btn btn-success m-2" (click)="addRoom()">Add Room</button>
+</div>

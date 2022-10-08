@@ -1,0 +1,19 @@
+.even{
+  background-color: #eee;
+  color:red;
+  text-align: center;
+  height: 80px;
+}
+.odd{
+  background-color:#333;
+  color:white;
+  text-align: center;
+  height: 80px;
+}
+.btn{
+  color:green;
+  &:hover{
+    color:white;
+  }
+}
+
