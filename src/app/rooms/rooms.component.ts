@@ -1,6 +1,7 @@
 import {  AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild,ViewChildren,QueryList } from '@angular/core';
 import { Rooms, RoomList } from './rooms';
 import { HeaderComponent } from './../header/header.component';
+import { RoomService } from './../room.service';
 
 @Component({
   selector: 'app-rooms',
@@ -50,42 +51,11 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
     // rather than modifying the old object we create a new instance with the old data along the new on and reset
     this.roomlist=[...this.roomlist,room];
   }
-  constructor() {}
+  constructor(private roomService:RoomService) {}
 
   ngOnInit(): void {
 
-    this.roomlist=[
-      {
-        roomNumber:1,
-        roomType: 'Deluxe Room',
-        amenities: ' AC-Free Wi-fi, TV , Bathroom , Kitchen',
-        price: 500,
-        photos: 'https://place.hold.it/300/400.png',
-        checkinTime: new Date('11-Nov-2022'),
-        checkoutTime: new Date('20-Nov-2022'),
-        rating:4.5,
-      },
-      {
-        roomNumber:2,
-        roomType: 'Deluxe Room',
-        amenities: ' AC-Free Wi-fi, TV , Bathroom , Kitchen',
-        price: 1000,
-        photos: 'https://place.hold.it/300/400.png',
-        checkinTime: new Date('11-Nov-2022'),
-        checkoutTime: new Date('20-Nov-2022'),
-        rating:4.2,
-      },
-      {
-        roomNumber:3,
-        roomType: 'Private Suite',
-        amenities: ' AC-Free Wi-fi, TV , Bathroom , Kitchen',
-        price: 1500,
-        photos: 'https://place.hold.it/300/400.png',
-        checkinTime: new Date('11-Nov-2022'),
-        checkoutTime: new Date('20-Nov-2022'),
-        rating:3.8,
-      },
-    ];
+    this.roomlist=this.roomService.getRooms();
   }
   ngAfterViewInit(): void {
     console.log(this.headerChildren);
