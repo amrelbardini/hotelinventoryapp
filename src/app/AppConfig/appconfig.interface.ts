@@ -1,4 +1,4 @@
 
-interface AppConfig{
+export interface AppConfig{
   apiEndPoint:string;
 }

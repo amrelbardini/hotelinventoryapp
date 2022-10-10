@@ -1,5 +1,5 @@
 import {  AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild,ViewChildren,QueryList } from '@angular/core';
-import { Rooms, RoomList } from './rooms';
+import { Rooms, RoomList } from './rooms.interface';
 import { HeaderComponent } from './../header/header.component';
 import { RoomService } from './../room.service';
 

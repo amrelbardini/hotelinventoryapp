@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
-import { RoomList } from './rooms/rooms';
+import { Inject, Injectable } from '@angular/core';
+import { RoomList } from './rooms/rooms.interface';
+import { APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
+import { AppConfig } from '../app/AppConfig/appconfig.interface';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomService {
-  constructor() {
+  constructor(@Inject(APP_SERVICE_CONFIG) private appConfig:AppConfig) {
     console.log("Room service is getting initialized....");
+    console.log(this.appConfig.apiEndPoint);
   }
 
    rooms: RoomList[] = [
