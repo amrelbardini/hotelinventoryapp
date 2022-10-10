@@ -5,8 +5,9 @@ import { RoomList } from './rooms/rooms';
   providedIn: 'root',
 })
 export class RoomService {
-
-  constructor() {}
+  constructor() {
+    console.log("Room service is getting initialized....");
+  }
 
    rooms: RoomList[] = [
     {
@@ -40,7 +41,6 @@ export class RoomService {
       rating: 3.8,
     },
   ];
-
 
   getRooms():RoomList[]{
     return this.rooms;

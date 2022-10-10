@@ -1,6 +1,5 @@
 import { Component, ViewChild, ViewContainerRef, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
-import { RoomsComponent } from './rooms/rooms.component';
-import { HeaderComponent } from './header/header.component';
+
 
 
 @Component({

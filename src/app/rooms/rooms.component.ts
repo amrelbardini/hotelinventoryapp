@@ -7,6 +7,7 @@ import { RoomService } from './../room.service';
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss'],
+  providers:[RoomService],
 
 })
 export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
@@ -27,7 +28,7 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
   // static true property is added when it's safe to use that component in the ngOnInit of another component
   @ViewChild(HeaderComponent) HeaderComponent!:HeaderComponent;
   // static property is immutable in viewchildren so you have to access the instances in ngAfterViewInit, it's accessed as a list
-  @ViewChildren(HeaderComponent) headerChildren!:QueryList<HeaderComponent>
+  // @ViewChildren(HeaderComponent) headerChildren!:QueryList<HeaderComponent>
 
   selectRoom(room:RoomList){
     this.selectedRoom=room;
@@ -58,10 +59,10 @@ export class RoomsComponent implements OnInit,AfterViewInit,AfterViewChecked {
     this.roomlist=this.roomService.getRooms();
   }
   ngAfterViewInit(): void {
-    console.log(this.headerChildren);
-    this.headerChildren.first.title="First Component Child";
-    this.headerChildren.get(1)!.title="middle component child";
-    this.headerChildren.last.title="Last component child";
+    // console.log(this.headerChildren);
+    // this.headerChildren.first.title="First Component Child";
+    // this.headerChildren.get(1)!.title="middle component child";
+    // this.headerChildren.last.title="Last component child";
   }
   ngAfterViewChecked(): void {
 

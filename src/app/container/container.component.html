@@ -1,0 +1,13 @@
+<!--
+  ng-content is used to project components for dynamic rendering the order of the components rendered depends on the order that
+  we've selected using the select property.
+  the next step is to wrap up our components in the container component, and add all that in the app component or the root component
+  it will get rendered in the order we chose here!
+-->
+<ng-content select="app-header"></ng-content>
+<ng-content select="app-employee"></ng-content>
+<ng-content select="app-rooms"></ng-content>
+
+
+
+
