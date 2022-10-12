@@ -19,13 +19,14 @@ import { RoomList } from '../rooms.interface';
 export class RoomsListComponent implements OnInit, OnChanges {
   @Input() rooms: RoomList[] = [];
   @Input() title: string = '';
-
   @Output() selectedRoom = new EventEmitter<RoomList>();
+
+
 
   constructor() {}
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['title']);
+    // console.log(changes['title']);
     if (changes['title']) {
       this.title = changes['title'].currentValue.toUpperCase();
     }
@@ -34,4 +35,6 @@ export class RoomsListComponent implements OnInit, OnChanges {
   selectRoom(room: RoomList) {
     this.selectedRoom.emit(room);
   }
+
+
 }

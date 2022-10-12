@@ -15,10 +15,17 @@ export class RoomService {
     console.log(this.appConfig.apiEndPoint);
   }
 
-   
+
 
   getRooms(){
     //typecast the return of the get method to roomlist array
-    return this.http.get<RoomList[]>('https://api.npoint.io/5279d200642e9ea7a419');
+    return this.http.get<RoomList[]>(this.appConfig.apiEndPoint);
+  }
+  addRoom(room:RoomList[]){
+    return this.http.post<RoomList[]>(this.appConfig.apiEndPoint,room);
+  }
+  editRoom(room:RoomList){
+    // will delete the entire data on the json server and only save that of the sent argument
+    return this.http.post<RoomList>(`https://api.npoint.io/efa5a99b282cfade2ab1`,room);
   }
 }
