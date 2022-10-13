@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint:'https://api.npoint.io/7da03ee76f3b79205514',
+  apiEndpoint:'https://api.npoint.io/73c70139546260a5daf0',
 };
 
 /*

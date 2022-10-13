@@ -80,8 +80,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   addRoom() {
     const room: RoomList = {
-      roomNumber: 6,
-      roomType: 'Deluxe Room',
+      roomNumber: this.roomlist.length+1,
+      roomType: 'new Room',
       amenities: ' AC-Free Wi-fi, TV , Bathroom , Kitchen',
       price: 300,
       photos: 'https://place.hold.it/300/400.png',
@@ -124,6 +124,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.roomService.getRooms().subscribe((rooms) => {
       this.roomlist = rooms;
     });
+    //get photos using httprequest
+    console.log(this.roomService.getPhotos());
   }
   ngAfterViewInit(): void {
     // console.log(this.headerChildren);
