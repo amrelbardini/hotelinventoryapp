@@ -39,6 +39,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   roomlist: RoomList[] = [];
 
   selectedRoom!: RoomList;
+  deletedRoom!:number;
 
   title: string = 'Room List';
   // static true property is added when it's safe to use that component in the ngOnInit of another component
@@ -55,19 +56,19 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.title = 'rooms list';
   }
   editRoom() {
-    console.log('EDiT ROOM IS CALLED');
+    console.log('EDIT ROOM IS CALLED');
     const room: RoomList = {
       roomNumber: 3,
-      roomType: 'New Room',
+      roomType: 'Edited Room',
       amenities: ' AC-Free Wi-fi, TV , Bathroom , Kitchen',
-      price: 999999999,
+      price: 100,
       photos: 'https://place.hold.it/300/400.png',
       checkinTime: new Date('11-Nov-2022'),
       checkoutTime: new Date('20-Nov-2022'),
       rating: 4.5,
     };
      const rooms=this.roomlist;
-    this.roomService.editRoom(room).subscribe((room) => {
+    this.roomService.editRoom(room).subscribe((data) => {
       for(let i=0;i<rooms.length;i++){
         if(rooms[i].roomNumber===room.roomNumber){
           rooms[i]=room;
@@ -94,6 +95,20 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.roomService.addRoom(rooms).subscribe((data) => {
       this.roomlist = data;
     });
+  }
+
+  deleteRoom(id:number){
+    this.deletedRoom=id;
+    console.log(id);
+    this.roomService.UpdateRooms(this.roomlist).subscribe(rooms=>{
+      this.roomlist= rooms.filter(room=>room.roomNumber!==id);
+    console.log('delete room is called from parent component');
+    });
+
+
+
+
+
   }
 
   constructor(private roomService: RoomService) {}

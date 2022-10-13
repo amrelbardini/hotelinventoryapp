@@ -20,6 +20,7 @@ export class RoomsListComponent implements OnInit, OnChanges {
   @Input() rooms: RoomList[] = [];
   @Input() title: string = '';
   @Output() selectedRoom = new EventEmitter<RoomList>();
+  @Output() deletedRoom= new EventEmitter<number>();
 
 
 
@@ -34,6 +35,10 @@ export class RoomsListComponent implements OnInit, OnChanges {
 
   selectRoom(room: RoomList) {
     this.selectedRoom.emit(room);
+  }
+  deleteRoom(id:number){
+   this.deletedRoom.emit(id);
+   console.log('delete room called from child component---> roomsList',id)
   }
 
 
