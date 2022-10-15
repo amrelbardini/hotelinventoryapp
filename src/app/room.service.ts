@@ -2,7 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { RoomList } from './rooms/rooms.interface';
 import { APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
 import { AppConfig } from '../app/AppConfig/appconfig.interface';
-import { HttpClient,HttpRequest } from '@angular/common/http';
+import { Observable, shareReplay } from 'rxjs';
+import { HttpClient,HttpRequest,HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -15,21 +16,26 @@ export class RoomService {
     console.log(this.appConfig.apiEndPoint);
   }
 
+  // headers= new HttpHeaders({token:'asdasdasdas641532121231'});
+  getRooms$=this.http.get<RoomList[]>('https://api.npoint.io/87fa32caa4cc49539a8e').pipe(
+    shareReplay(1)
+  );
+
 
 
   getRooms(){
     //typecast the return of the get method to roomlist array
-    return this.http.get<RoomList[]>(this.appConfig.apiEndPoint);
+    return this.http.get(this.appConfig.apiEndPoint);
   }
   addRoom(room:RoomList[]){
     return this.http.post<RoomList[]>(this.appConfig.apiEndPoint,room);
   }
   editRoom(room:RoomList){
     // will delete the entire data on the json server and only save that of the sent argument
-    return this.http.post<RoomList>(`https://api.npoint.io/73c70139546260a5daf0`,room);
+    return this.http.post<RoomList>(`https://api.npoint.io/87fa32caa4cc49539a8e`,room);
   }
   UpdateRooms(rooms:RoomList[]){
-    return this.http.post<RoomList[]>(`https://api.npoint.io/73c70139546260a5daf0`,rooms)
+    return this.http.post<RoomList[]>(`https://api.npoint.io/87fa32caa4cc49539a8e`,rooms)
   }
 
   getPhotos(){

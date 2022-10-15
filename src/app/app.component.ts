@@ -1,5 +1,6 @@
 import { Component, ViewChild, ViewContainerRef, OnInit, AfterViewInit, ElementRef, ViewChildren, QueryList, Inject } from '@angular/core';
 import { LocalStorageTocken} from './localstorage.tocken';
+import { InitService } from './init.service';
 
 
 
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit,AfterViewInit {
   // @ViewChild('user',{read:ViewContainerRef}) vcr!:ViewContainerRef;
   @ViewChild('name',{read:ElementRef}) name!:ElementRef;
 
-  constructor(@Inject(LocalStorageTocken) private LocalStorage:Storage){
+  constructor(@Inject(LocalStorageTocken) private LocalStorage:Storage, private initService:InitService){
+    console.log(initService.config);
 
   }
 

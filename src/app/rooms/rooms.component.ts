@@ -10,7 +10,9 @@ import {
 import { Rooms, RoomList } from './rooms.interface';
 import { HeaderComponent } from './../header/header.component';
 import { RoomService } from './../room.service';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
+import { HttpEventType, HttpResponse,HttpClient, HttpHeaders } from '@angular/common/http';
+import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-rooms',
@@ -28,6 +30,11 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     bookedRooms: 5,
     hotelRooms: 20,
   };
+// creating a stream and cashing the main data to be used, instead of calling the main data more than once
+//
+
+
+
 
   stream = new Observable((observer) => {
     observer.next('user1');
@@ -39,7 +46,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   roomlist: RoomList[] = [];
 
   selectedRoom!: RoomList;
-  deletedRoom!:number;
+  deletedRoom!: number;
 
   title: string = 'Room List';
   // static true property is added when it's safe to use that component in the ngOnInit of another component
@@ -67,20 +74,19 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
       checkoutTime: new Date('20-Nov-2022'),
       rating: 4.5,
     };
-     const rooms=this.roomlist;
-    this.roomService.editRoom(room).subscribe((data) => {
-      for(let i=0;i<rooms.length;i++){
-        if(rooms[i].roomNumber===room.roomNumber){
-          rooms[i]=room;
-          this.roomlist=[...rooms];
+    const rooms = this.roomlist;
+    this.roomService.editRoom(room).subscribe((room) => {
+      for (let i = 0; i < rooms.length; i++) {
+        if (rooms[i].roomNumber === room.roomNumber) {
+          rooms[i] = room;
+          this.roomlist = [...rooms];
         }
       }
     });
   }
-
   addRoom() {
     const room: RoomList = {
-      roomNumber: this.roomlist.length+1,
+      roomNumber: this.roomlist.length + 1,
       roomType: 'new Room',
       amenities: ' AC-Free Wi-fi, TV , Bathroom , Kitchen',
       price: 300,
@@ -97,21 +103,17 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     });
   }
 
-  deleteRoom(id:number){
-    this.deletedRoom=id;
+  deleteRoom(id: number) {
+    this.deletedRoom = id;
     console.log(id);
-    this.roomService.UpdateRooms(this.roomlist).subscribe(rooms=>{
-      this.roomlist= rooms.filter(room=>room.roomNumber!==id);
-    console.log('delete room is called from parent component');
+    this.roomService.UpdateRooms(this.roomlist).subscribe((rooms) => {
+      this.roomlist = rooms.filter((room) => room.roomNumber !== id);
+      console.log('delete room is called from parent component');
     });
-
-
-
-
-
   }
-
-  constructor(private roomService: RoomService) {}
+  totalBytes:number=0;
+  constructor(private roomService: RoomService,
+    private http:HttpClient) {}
   ngOnInit(): void {
     this.stream.subscribe({
       next: (value) => {
@@ -121,11 +123,27 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
       error: (err) => console.log(err),
     });
     //api call happens at getRooms function sends back a stream (observable)
-    this.roomService.getRooms().subscribe((rooms) => {
+    this.roomService.getRooms$.subscribe((rooms) => {
       this.roomlist = rooms;
     });
-    //get photos using httprequest
-    console.log(this.roomService.getPhotos());
+    //get photos using httprequest to access each event using type property
+    this.roomService.getPhotos().subscribe((event) => {
+      switch(event.type){
+        case HttpEventType.Sent:{
+          console.log('request sent');
+          break;
+        }
+        case HttpEventType.ResponseHeader:{
+          console.log('Request success!');
+          break;
+        }
+        case HttpEventType.DownloadProgress:{
+          this.totalBytes+=event.loaded;
+          console.log(this.totalBytes);
+        }
+      }
+
+    });
   }
   ngAfterViewInit(): void {
     // console.log(this.headerChildren);
