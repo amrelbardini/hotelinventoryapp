@@ -23,7 +23,7 @@
     "@angular/router": "^14.2.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
-    "angular": "^1.6.10",
+    "angular": "^1.8.3",
     "bootstrap": "^5.2.2",
     "nest": "^0.1.6",
     "ngx-bootstrap": "^9.0.0",
