@@ -13,6 +13,7 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './request.interceptor';
 import { InitService } from './init.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -26,7 +27,7 @@ function initFactory(initService: InitService) {
     ContainerComponent,
     EmployeeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, BrowserAnimationsModule],
   providers: [
     { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },

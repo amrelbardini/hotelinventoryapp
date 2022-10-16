@@ -22,16 +22,12 @@ export class AppComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit():void{
-
   //we can't create the instance here due to component life cycle if the static property is false.
-
    this.LocalStorage.setItem('name',"John");
-
   }
   ngAfterViewInit():void{
     // const componentRef=this.vcr.createComponent(RoomsComponent);
     const elementRef=this.name.nativeElement.innerText="Hotel Hilton";
-
   }
 };
 
