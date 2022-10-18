@@ -10,12 +10,8 @@
     <app-employee></app-employee>
     <app-rooms></app-rooms>
 </app-container> -->
-<nav class="text-center nav">
-  <a class="btn btn-danger m-2" [routerLink]="'rooms'">Rooms</a>
-  <a class="btn btn-warning m-2 " [routerLink]="'employee'">Empolyee</a>
-</nav>
+<app-navbar></app-navbar>
 
-<router-outlet></router-outlet>
 <!-- <div [ngSwitch]="role">
     <div *ngSwitchCase="'user'">
       Welcome user!

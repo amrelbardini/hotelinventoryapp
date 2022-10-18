@@ -17,7 +17,7 @@ export class RoomService {
   }
 
   // headers= new HttpHeaders({token:'asdasdasdas641532121231'});
-  getRooms$=this.http.get<RoomList[]>('https://api.npoint.io/87fa32caa4cc49539a8e').pipe(
+  getRooms$=this.http.get<RoomList[]>(this.appConfig.apiEndPoint).pipe(
     shareReplay(1)
   );
 
@@ -32,10 +32,10 @@ export class RoomService {
   }
   editRoom(room:RoomList){
     // will delete the entire data on the json server and only save that of the sent argument
-    return this.http.post<RoomList>(`https://api.npoint.io/87fa32caa4cc49539a8e`,room);
+    return this.http.post<RoomList>(this.appConfig.apiEndPoint,room);
   }
   UpdateRooms(rooms:RoomList[]){
-    return this.http.post<RoomList[]>(`https://api.npoint.io/87fa32caa4cc49539a8e`,rooms)
+    return this.http.post<RoomList[]>(this.appConfig.apiEndPoint,rooms)
   }
 
   getPhotos(){
