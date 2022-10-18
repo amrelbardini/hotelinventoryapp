@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { RoomBookingComponent } from './rooms/room-booking/room-booking.component';
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -36,6 +37,7 @@ function initFactory(initService: InitService) {
     EmployeeComponent,
     NotfoundComponent,
     NavbarComponent,
+    RoomBookingComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, BrowserAnimationsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule],
   providers: [
