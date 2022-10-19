@@ -11,9 +11,11 @@
   height: 80px;
 }
 .btn{
+  background-color: #eee;
   color:green;
   &:hover{
-    color:white;
+    background-color: #333;
+    color:#eee;
   }
 }
 

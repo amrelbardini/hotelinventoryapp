@@ -41,9 +41,7 @@ export class RoomsListComponent implements OnInit, OnChanges {
    console.log('delete room called from child component---> roomsList',id)
   }
 
-  bookRoom(room:RoomList){
-    console.log(room);
-  }
+
 
 
 }
