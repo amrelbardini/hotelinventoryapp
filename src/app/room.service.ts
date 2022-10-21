@@ -25,7 +25,7 @@ export class RoomService {
 
   getRooms(){
     //typecast the return of the get method to roomlist array
-    return this.http.get(this.appConfig.apiEndPoint);
+    return this.http.get<RoomList[]>(this.appConfig.apiEndPoint);
   }
   addRoom(room:RoomList[]){
     return this.http.post<RoomList[]>(this.appConfig.apiEndPoint,room);
@@ -35,7 +35,7 @@ export class RoomService {
     return this.http.post<RoomList>(this.appConfig.apiEndPoint,room);
   }
   UpdateRooms(rooms:RoomList[]){
-    return this.http.post<RoomList[]>(this.appConfig.apiEndPoint,rooms)
+    return this.http.post<RoomList[]>(this.appConfig.apiEndPoint,rooms);
   }
 
   getPhotos(){

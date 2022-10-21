@@ -46,7 +46,7 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   roomlist: RoomList[] = [];
 
   selectedRoom!: RoomList;
-  deletedRoom!: number;
+
 
   title: string = 'Room List';
   // static true property is added when it's safe to use that component in the ngOnInit of another component
@@ -102,12 +102,12 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.roomlist = data;
     });
   }
-
+  //delete room
   deleteRoom(id: number) {
-    this.deletedRoom = id;
-    console.log(id);
-    this.roomService.UpdateRooms(this.roomlist).subscribe((rooms) => {
-      this.roomlist = rooms.filter((room) => room.roomNumber !== id);
+    const oldList=this.roomlist;
+    const newList=oldList.filter((room) => room.roomNumber !== id);
+    this.roomService.UpdateRooms(newList).subscribe((rooms) => {
+      this.roomlist=rooms;
       console.log('delete room is called from parent component');
     });
   }

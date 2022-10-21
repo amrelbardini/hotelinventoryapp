@@ -23,6 +23,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RoomBookingComponent } from './rooms/room-booking/room-booking.component';
+import { AddRoomComponent } from './rooms/add-room/add-room.component';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -38,8 +42,11 @@ function initFactory(initService: InitService) {
     NotfoundComponent,
     NavbarComponent,
     RoomBookingComponent,
+    AddRoomComponent,
+    LoginComponent,
+
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, BrowserAnimationsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule, BrowserAnimationsModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,FormsModule,],
   providers: [
     { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },

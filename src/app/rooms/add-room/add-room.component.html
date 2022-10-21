@@ -1,0 +1,39 @@
+<div class="text-center">{{room |json}}</div>
+<div class="text-center">{{roomsForm.pristine |json}}</div>
+<div class="text-center">{{roomsForm.dirty |json}}</div>
+<div class="text-center">{{roomsForm.invalid |json}}</div>
+<div class="text-center">{{roomsForm.value |json}}</div>
+<div class="text-center">{{roomsForm.valid |json}}</div>
+<div *ngIf="successMsg" class="alert alert-success">{{successMsg}}</div>
+<div class="form-container">
+  <form #roomsForm="ngForm" class="form" (ngSubmit)="addRoom(roomsForm)">
+    <div class="form-group">
+      <input required [(ngModel)]="room.roomType" type="text" class="form-control" name="roomType" placeholder="Enter Room Type">
+    </div>
+    <div class="form-group">
+      <input #roomAmenties="ngModel" minlength="5" maxlength="25" required [(ngModel)]="room.amenities" type="text" class="form-control"  name="amenities" placeholder="Enter amenities">
+      <div *ngIf="roomAmenties.errors?.['minlength']" class="alert alert-danger">
+        Minimum length is 5 characters
+      </div>
+    </div>
+    <div class="form-group">
+      <input required [(ngModel)]="room.price" type="number" class="form-control" name="price"  placeholder="Enter price">
+    </div>
+    <div class="form-group">
+      <input required [(ngModel)]="room.photos" type="text" class="form-control" name="photos" placeholder="Enter photos url">
+    </div>
+    <div class="form-group">
+      <input required [(ngModel)]="room.checkinTime" type="datetime" class="form-control" name="checkinTime"  placeholder="Enter checkin time">
+    </div>
+    <div class="form-group">
+      <input required [(ngModel)]="room.checkoutTime" type="datetime" class="form-control" name="checkoutTime" placeholder="Enter checkout time">
+    </div>
+    <div class="form-group">
+      <input required min="1" max="5" type="number" class="form-control" [(ngModel)]="room.rating" name="rating"  placeholder="Enter room rating">
+    </div>
+    <div class="form-group">
+      <input required [(ngModel)]="room.roomNumber" name="roomNumber" type="number" class="form-control" placeholder="Enter Room Number">
+    </div>
+    <button [disabled]="roomsForm.invalid" type="submit" class="btn btn-success">Add Room</button>
+  </form>
+</div>
