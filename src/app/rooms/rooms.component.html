@@ -26,8 +26,10 @@
     (deletedRoom)="deleteRoom($event)"
     [title]="title"
   ></app-rooms-list>
+
   <!--Event binding example-->
   <button class="btn btn-primary m-2" (click)="toggle()">toggle</button>
   <button class="btn btn-success m-2" (click)="addRoom()">Add Room</button>
   <button class="btn btn-warning m-2" (click)="editRoom()">Edit Room</button>
 </div>
+<router-outlet></router-outlet>

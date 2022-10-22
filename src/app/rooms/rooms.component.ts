@@ -10,9 +10,9 @@ import {
 import { Rooms, RoomList } from './rooms.interface';
 import { HeaderComponent } from './../header/header.component';
 import { RoomService } from './../room.service';
-import { Observable, shareReplay } from 'rxjs';
-import { HttpEventType, HttpResponse,HttpClient, HttpHeaders } from '@angular/common/http';
-import { NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { HttpEventType,HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-rooms',
@@ -74,15 +74,14 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
       checkoutTime: new Date('20-Nov-2022'),
       rating: 4.5,
     };
+    //clone current list
     const rooms = this.roomlist;
-    this.roomService.editRoom(room).subscribe((room) => {
-      for (let i = 0; i < rooms.length; i++) {
-        if (rooms[i].roomNumber === room.roomNumber) {
-          rooms[i] = room;
-          this.roomlist = [...rooms];
-        }
-      }
-    });
+    const roomRemoved=rooms.filter(room=>room.roomNumber!==3);
+    const updatedRooms=[...roomRemoved,room];
+    console.log(updatedRooms);
+    this.roomService.UpdateRooms(updatedRooms).subscribe(data=>{this.roomlist=data;});
+
+
   }
   addRoom() {
     const room: RoomList = {

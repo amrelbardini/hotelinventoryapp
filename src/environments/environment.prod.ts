@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiEndpoint:'https://api.npoint.io/782eb8b6b910e931dedf',
+  apiEndpoint:'https://api.npoint.io/3e6732b43720af87492e',
 };

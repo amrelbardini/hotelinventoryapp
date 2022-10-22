@@ -1,23 +1,25 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RoomsComponent } from './rooms/rooms.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { RoomBookingComponent } from './rooms/room-booking/room-booking.component';
-import { AddRoomComponent } from './rooms/add-room/add-room.component';
+import { LoginComponent } from './login/login.component';
 const routes: Routes = [
-  { path: 'rooms', component: RoomsComponent },
   { path: 'employee', component: EmployeeComponent },
-  { path: '', redirectTo: '/rooms', pathMatch: 'full' },
-  { path: 'rooms/add', component: AddRoomComponent },
-  { path: 'rooms/:id', component: RoomBookingComponent },
+  { path: 'login', component: LoginComponent },
+  //lazy loading room module to split the bundle at build time and increase efficiency
+  {
+    path: 'rooms',
+    loadChildren: () =>
+      import('./rooms/rooms.module').then((m) => m.RoomsModule),
+  },
+
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'booking', loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule) },
   { path: '**', component: NotfoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-
-
-exports: [RouterModule],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
