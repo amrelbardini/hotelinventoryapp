@@ -1,1 +1,61 @@
-<p>booking works!</p>
+<!-- mat elements will start working after importing matfieldmodule in ngmodule-->
+
+<div class="container">
+  <p class="form-values">
+    {{bookingForm.value | json}}
+  </p>
+  <p>
+    {{bookingForm.pristine }}
+  </p>
+  <p>
+    {{bookingForm.dirty }}
+  </p>
+</div>
+
+
+<form class="container" [formGroup]="bookingForm">
+  <!--roomID-->
+    <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label>Room ID</mat-label>
+      <input type="text" matInput formControlName="roomId" placeholder="ex. pat@example.com">
+    </mat-form-field>
+   <!--roomID-->
+   <!-- guest name -->
+   <mat-form-field class="full-width-field" appearance="fill">
+    <mat-label>Guest name</mat-label>
+    <input type="text" matInput formControlName="guestName" placeholder="provide your name">
+  </mat-form-field>
+    <!-- guest name -->
+   <!--Guest Email-->
+  <mat-form-field class="full-width-field" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="guestEmail" placeholder="provide your email">
+  </mat-form-field>
+   <!--Guest Email-->
+
+  <!--Mobile Number-->
+  <mat-form-field class="full-width-field" appearance="fill">
+    <mat-label>Mobile Number</mat-label>
+    <input type="text" matInput formControlName="mobileNumber" placeholder="mobileNumber">
+  </mat-form-field>
+  <!--Mobile Number-->
+  <!-- booking amount  -->
+  <mat-form-field class="full-width-field" appearance="fill">
+    <mat-label>Booking Amount</mat-label>
+    <input type="number" matInput formControlName="bookingAmount" placeholder="booking amount">
+  </mat-form-field>
+  <!-- booking amount  -->
+
+     <!-- check in date-->
+     <!-- <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label>check in Date</mat-label>
+      <input type="datetime" matInput formControlName="checkinDate" placeholder="enter checkindate">
+    </mat-form-field> -->
+    <!--check in date-->
+     <!--check out date-->
+    <!-- <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label>checkoutDate</mat-label>
+      <input type="datetime" matInput formControlName="checkoutDate" placeholder=" enter checkoutDate">
+    </mat-form-field> -->
+     <!--check out date -->
+</form>

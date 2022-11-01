@@ -6,16 +6,21 @@ import { RoomsComponent } from './rooms.component';
 import { RoomGuard } from './guards/room.guard';
 
 const routes: Routes = [
+  { path: 'add', component: AddRoomComponent,
+  //  canActivateChild: [RoomGuard]
+  },
 
   {
+
     path: '',
     component: RoomsComponent,
-    canActivateChild: [RoomGuard],
+    // canActivateChild: [RoomGuard],
     children: [
-      { path: 'add', component: AddRoomComponent, canActivateChild: [RoomGuard] },
+
       { path: ':id', component: RoomBookingComponent }
     ],
   },
+
 ];
 
 @NgModule({

@@ -5,18 +5,23 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { LoginComponent } from './login/login.component';
 import { LoginGuard } from './guards/login.guard';
 const routes: Routes = [
-  { path: 'employee', component: EmployeeComponent, canActivate:[LoginGuard]},
+  { path: 'employee', component: EmployeeComponent,
+    // canActivate:[LoginGuard]
+  },
   { path: 'login', component: LoginComponent },
   //lazy loading room module to split the bundle at build time and increase efficiency
   {
     path: 'rooms',
     loadChildren: () =>
       import('./rooms/rooms.module').then((m) => m.RoomsModule),
-      canActivate:[LoginGuard],
-      canLoad:[LoginGuard], // only load on login
+      // canActivate:[LoginGuard],
+      // canLoad:[LoginGuard], // only load on login
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'booking', loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule),canActivate:[LoginGuard] },
+  { path: 'booking',
+    loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule),
+    // canActivate:[LoginGuard]
+  },
   { path: '**', component: NotfoundComponent },
 ];
 
