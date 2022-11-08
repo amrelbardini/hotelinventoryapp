@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
+
 
 
 @Component({
@@ -25,11 +26,25 @@ export class BookingComponent implements OnInit {
       mobileNumber: [''],
       guestName: [''],
       guestAddress: [''],
-      guestCity: [''],
-      guestState: [''],
-      guestCountry: [''],
-      guestZipCode: [''],
-      guestList: [''],
+      address:this.fb.group({
+        adressLine1:[''],
+        adressLine2:[''],
+        City: [''],
+       State: [''],
+        Country: [''],
+        ZipCode: [''],
+      }),
+      guestCount: [''],
     });
   }
+
+  //ADD BOOKING
+  addBooking(){
+    //getRawValue instead of value to return disabled values as well
+      console.log(this.bookingForm.getRawValue());
+  }
+
+    panelOpenState = false;
+
+
 }

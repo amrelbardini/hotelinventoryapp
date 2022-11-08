@@ -1,61 +1,115 @@
 <!-- mat elements will start working after importing matfieldmodule in ngmodule-->
 
 <div class="container">
-  <p class="form-values">
+ <section class="form-values text-center">
+  <p >
     {{bookingForm.value | json}}
   </p>
   <p>
-    {{bookingForm.pristine }}
+      PRISTINE VALUE :<b class="text-capitalize"> {{"  "+bookingForm.pristine }}</b>
   </p>
   <p>
-    {{bookingForm.dirty }}
+    DIRTY VALUE :<b class="text-capitalize">{{"  "+bookingForm.dirty }}</b>
   </p>
+ </section>
+ <!--FORM START-->
+
+ <form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
+    <!--roomID-->
+      <mat-form-field class="full-width-field" appearance="fill">
+        <mat-label>Room ID</mat-label>
+        <input type="text" matInput formControlName="roomId" placeholder="ROOM ID">
+      </mat-form-field>
+    <!--roomID-->
+    <!-- guest name -->
+    <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label>Guest name</mat-label>
+      <input type="text" matInput formControlName="guestName" placeholder="provide your name">
+    </mat-form-field>
+      <!-- guest name -->
+    <!--Guest Email-->
+    <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="guestEmail" placeholder="provide your email">
+    </mat-form-field>
+    <!--Guest Email-->
+
+    <!--Mobile Number-->
+    <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label>Mobile Number</mat-label>
+      <input type="text" matInput formControlName="mobileNumber" placeholder="mobileNumber">
+    </mat-form-field>
+    <!--Mobile Number-->
+    <!-- booking amount  -->
+    <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label>Booking Amount</mat-label>
+      <input type="number" matInput formControlName="bookingAmount" placeholder="booking amount">
+    </mat-form-field>
+    <!-- booking amount  -->
+    <!--datepicker angular material for check in date-->
+    <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label  class="text-capitalize">Check In date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="checkinDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <!--datepicker angular material for check in date-->
+    <!--Check out date-->
+    <mat-form-field class="full-width-field" appearance="fill">
+      <mat-label class="text-capitalize">Check out date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="checkoutDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+      <!--Check out date-->
+      <!--NESTED FORM-->
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Address Form
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+          <div class="sub-form-container" formGroupName="address">
+            <mat-form-field class="full-width-field" appearance="fill">
+              <mat-label>Address Line 1</mat-label>
+              <input type="text" matInput formControlName="adressLine1" placeholder="Address line 1">
+            </mat-form-field>
+            <mat-form-field class="full-width-field" appearance="fill">
+              <mat-label>Address Line 2</mat-label>
+              <input type="text" matInput formControlName="adressLine2" placeholder="Address line2">
+            </mat-form-field>
+            <mat-form-field class="full-width-field" appearance="fill">
+              <mat-label>City</mat-label>
+              <input type="text" matInput formControlName="City" placeholder="City">
+            </mat-form-field>
+            <mat-form-field class="full-width-field" appearance="fill">
+              <mat-label>State</mat-label>
+              <input type="text" matInput formControlName="State" placeholder="State">
+            </mat-form-field>
+            <mat-form-field class="full-width-field" appearance="fill">
+              <mat-label>Zip Code</mat-label>
+              <input type="text" matInput formControlName="ZipCode" placeholder="ZipCode">
+            </mat-form-field>
+            <mat-form-field class="full-width-field" appearance="fill">
+              <mat-label>Country</mat-label>
+              <input type="text" matInput formControlName="Country" placeholder="Country">
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+      <!--NESTED FORM-->
+     <!--submit button-->
+     <div class="submit-container"  >
+       <button mat-button  class="full-width-field btn btn-warning" color="primary">ADD BOOKING</button>
+     </div>
+</form>
+ <!--FORM END-->
 </div>
 
 
-<form class="container" [formGroup]="bookingForm">
-  <!--roomID-->
-    <mat-form-field class="full-width-field" appearance="fill">
-      <mat-label>Room ID</mat-label>
-      <input type="text" matInput formControlName="roomId" placeholder="ex. pat@example.com">
-    </mat-form-field>
-   <!--roomID-->
-   <!-- guest name -->
-   <mat-form-field class="full-width-field" appearance="fill">
-    <mat-label>Guest name</mat-label>
-    <input type="text" matInput formControlName="guestName" placeholder="provide your name">
-  </mat-form-field>
-    <!-- guest name -->
-   <!--Guest Email-->
-  <mat-form-field class="full-width-field" appearance="fill">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput formControlName="guestEmail" placeholder="provide your email">
-  </mat-form-field>
-   <!--Guest Email-->
 
-  <!--Mobile Number-->
-  <mat-form-field class="full-width-field" appearance="fill">
-    <mat-label>Mobile Number</mat-label>
-    <input type="text" matInput formControlName="mobileNumber" placeholder="mobileNumber">
-  </mat-form-field>
-  <!--Mobile Number-->
-  <!-- booking amount  -->
-  <mat-form-field class="full-width-field" appearance="fill">
-    <mat-label>Booking Amount</mat-label>
-    <input type="number" matInput formControlName="bookingAmount" placeholder="booking amount">
-  </mat-form-field>
-  <!-- booking amount  -->
-
-     <!-- check in date-->
-     <!-- <mat-form-field class="full-width-field" appearance="fill">
-      <mat-label>check in Date</mat-label>
-      <input type="datetime" matInput formControlName="checkinDate" placeholder="enter checkindate">
-    </mat-form-field> -->
-    <!--check in date-->
-     <!--check out date-->
-    <!-- <mat-form-field class="full-width-field" appearance="fill">
-      <mat-label>checkoutDate</mat-label>
-      <input type="datetime" matInput formControlName="checkoutDate" placeholder=" enter checkoutDate">
-    </mat-form-field> -->
-     <!--check out date -->
-</form>
