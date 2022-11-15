@@ -32,15 +32,16 @@ export class BookingComponent implements OnInit {
       guestName: ['',[Validators.required, Validators.minLength(5)]],
       guestAddress: [''],
       address:this.fb.group({
-        adressLine1:[''],
-        adressLine2:[''],
+        adressLine1:['',[Validators.required]],
+        adressLine2:['',[Validators.required]],
         City: [''],
-       State: [''],
+        State: [''],
         Country: [''],
         ZipCode: [''],
       }),
       // it's an array of formbuildergroup or an array of form controls if you will.
-      guests:this.fb.array([this.fb.group({guestName:[''],age:new FormControl('')})]),
+      guests:this.fb.array(
+        [this.fb.group({guestName:['',[Validators.required]],age:new FormControl('',{validators:[Validators.required]})})]),
       //required true used when the default value is already given, such as boolean params (checkbox)
       TnC:new FormControl(false,{validators:[Validators.requiredTrue]}),
     });
@@ -50,8 +51,8 @@ export class BookingComponent implements OnInit {
   addBooking(){
     //getRawValue instead of value to return disabled values as well
       console.log(this.bookingForm.getRawValue());
+      // reset functions takes the default values of the desired form controls as an input object
       this.bookingForm.reset();
-
   }
   panelOpenState = false;
   //add guest

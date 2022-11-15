@@ -25,6 +25,7 @@
     <mat-form-field class="full-width-field" appearance="fill">
       <mat-label>Guest name</mat-label>
       <input type="text" matInput formControlName="guestName" placeholder="provide your name">
+      <mat-error *ngIf="bookingForm.get('guestName')?.hasError('minlength')">min guest name length is 5</mat-error>
     </mat-form-field>
       <!-- guest name -->
     <!--Guest Email-->
@@ -82,10 +83,16 @@
             <mat-form-field class="full-width-field" appearance="fill">
               <mat-label>Address Line 1</mat-label>
               <input type="text" matInput formControlName="adressLine1" placeholder="Address line 1">
+              <mat-error *ngIf="bookingForm.get('address.adressLine1')?.hasError('required')">
+                address is required!
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="full-width-field" appearance="fill">
               <mat-label>Address Line 2</mat-label>
               <input type="text" matInput formControlName="adressLine2" placeholder="Address line2">
+              <mat-error *ngIf="bookingForm.get('address.adressLine2')?.hasError('required')">
+                address line 2 is required!
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="full-width-field" appearance="fill">
               <mat-label>City</mat-label>
@@ -114,6 +121,10 @@
                 <mat-form-field class="full-width-field" appearance="fill">
                   <mat-label>Guest Name</mat-label>
                   <input type="text" matInput formControlName="guestName" placeholder="Guest Name">
+                  <mat-error *ngIf="bookingForm.get(['guests',i,'guestName'])?.hasError('required')">
+                   Guest name is required!
+                  </mat-error>
+
                 </mat-form-field>
                 <mat-form-field class="full-width-field" appearance="fill">
                   <mat-label>Age</mat-label>
