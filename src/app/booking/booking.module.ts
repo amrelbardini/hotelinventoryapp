@@ -10,6 +10,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -18,7 +20,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     BookingComponent,
-
   ],
   imports: [
     BookingRoutingModule,
@@ -30,11 +31,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatNativeDateModule,
     MatExpansionModule,
     MatCheckboxModule,
+    HttpClientModule,
     CommonModule
   ],
   providers:[
     MatDatepickerModule,
-
   ]
 })
 

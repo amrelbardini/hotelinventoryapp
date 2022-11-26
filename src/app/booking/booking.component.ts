@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
+import { BookingService } from './booking.service';
+import { CustomValidator } from './validators/custom-validator';
 
 
 
@@ -17,19 +19,30 @@ export class BookingComponent implements OnInit {
   }
 
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+              private bookingService:BookingService
+              ) {}
 
   ngOnInit(): void {
+    //initializing form
     this.bookingForm = this.fb.group({
       roomId: new FormControl('',{validators:[Validators.required]}), // this syntax is equal to the one at the bottom but more readable
       guestEmail: ['',[Validators.required,Validators.email]],
-      checkinDate: [''],
-      checkoutDate: [''],
+      checkinDate: ['', {updateOn:'blur'}],
+      checkoutDate: ['', {updateOn:'blur'}],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
-      mobileNumber: [''],
-      guestName: ['',[Validators.required, Validators.minLength(5)]],
+      // update value only after leaving the control field not on keypress helps with form performance
+      mobileNumber: ['', {updateOn:'blur'}],
+      guestName: ['',
+                    [
+                      Validators.required,
+                      Validators.minLength(5),
+                      CustomValidator.validateName,
+                      CustomValidator.validateSpecialChar('*')
+                      ]
+        ],
       guestAddress: [''],
       address:this.fb.group({
         adressLine1:['',[Validators.required]],
@@ -44,15 +57,24 @@ export class BookingComponent implements OnInit {
         [this.fb.group({guestName:['',[Validators.required]],age:new FormControl('',{validators:[Validators.required]})})]),
       //required true used when the default value is already given, such as boolean params (checkbox)
       TnC:new FormControl(false,{validators:[Validators.requiredTrue]}),
-    });
+
+    }, [CustomValidator.validateDate]);
+    // show values in real time
+    // this.bookingForm.valueChanges.subscribe((data)=>{
+    //   console.log(data);
+    // });
   }
 
   //ADD BOOKING
   addBooking(){
     //getRawValue instead of value to return disabled values as well
-      console.log(this.bookingForm.getRawValue());
+    console.log( this.bookingForm.getRawValue());
+    this.bookingService.bookRoom(this.bookingForm.getRawValue()).subscribe(data=>{
+      console.log(data);
+    });
+
       // reset functions takes the default values of the desired form controls as an input object
-      this.bookingForm.reset();
+     // this.bookingForm.reset();
   }
   panelOpenState = false;
   //add guest
