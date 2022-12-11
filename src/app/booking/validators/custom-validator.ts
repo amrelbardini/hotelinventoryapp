@@ -30,13 +30,16 @@ export class CustomValidator {
     const checkoutDate:any=new Date(control.get('checkoutDate')?.value);
  // calculate time diff large-small
     const diffTime=(checkoutDate-checkinDate);
+
     const diffDays=Math.ceil(diffTime/(1000 * 60 * 60 * 24));
 
-    console.log("difftime ----> value");
-    console.log(diffTime);
-
     if(diffDays<=0){
-       control.get('checkoutDate')?.setErrors({invalidDate:true});
+      // to add error on control level
+       control.get('checkoutDate')?.setErrors(
+        {
+          invalidDate:true
+        }
+        );
        return {invalidDate:true};
     }else{
       return null;

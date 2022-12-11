@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { BookingService } from './booking.service';
 import { CustomValidator } from './validators/custom-validator';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -20,16 +21,21 @@ export class BookingComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-              private bookingService:BookingService
+              private bookingService:BookingService,
+              private route:ActivatedRoute
               ) {}
 
   ngOnInit(): void {
     //initializing form
+    const roomId=this.route.snapshot.paramMap.get('id');
     this.bookingForm = this.fb.group({
-      roomId: new FormControl('',{validators:[Validators.required]}), // this syntax is equal to the one at the bottom but more readable
+      roomId: new FormControl(
+        {value:roomId,disabled:true},
+        {validators:[Validators.required]}
+        ), // this syntax is equal to the one at the bottom but more readable
       guestEmail: ['',[Validators.required,Validators.email]],
-      checkinDate: ['', {updateOn:'blur'}],
-      checkoutDate: ['', {updateOn:'blur'}],
+      checkinDate: ['',{updateOn:'blur'}],
+      checkoutDate: ['',{updateOn:'blur'}],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
@@ -57,8 +63,8 @@ export class BookingComponent implements OnInit {
         [this.fb.group({guestName:['',[Validators.required]],age:new FormControl('',{validators:[Validators.required]})})]),
       //required true used when the default value is already given, such as boolean params (checkbox)
       TnC:new FormControl(false,{validators:[Validators.requiredTrue]}),
-
-    }, [CustomValidator.validateDate]);
+     // validation on a form group
+    },{ updateOn:'blur',validators:[CustomValidator.validateDate]} );
     // show values in real time
     // this.bookingForm.valueChanges.subscribe((data)=>{
     //   console.log(data);

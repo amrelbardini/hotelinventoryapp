@@ -9,7 +9,6 @@ export class BookingService {
   constructor(private http:HttpClient) { }
 
   bookRoom(booking:any){
-
-   return this.http.post('https://jsonplaceholder.typicode.com/posts', booking);
+   return this.http.post('https://dummyjson.com/posts', booking);
   }
 }
