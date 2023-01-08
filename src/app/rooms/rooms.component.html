@@ -19,13 +19,21 @@
   <div *ngIf="selectedRoom">
     {{ selectedRoom | json }}
   </div>
+
+  <div class="filter">
+    {{"the current price filter value "+ priceFilter.value | json}}
+    <input type="number" class="form-control" placeholder="filter by price" [formControl]="priceFilter">
+  </div>
+
   <!--roomslist component-->
   <app-rooms-list
     [rooms]="roomlist"
     (selectedRoom)="selectRoom($event)"
     (deletedRoom)="deleteRoom($event)"
     [title]="title"
+    [price]="priceFilter.value!"
   ></app-rooms-list>
+
 
   <!--Event binding example-->
   <button class="btn btn-primary m-2" (click)="toggle()">toggle</button>

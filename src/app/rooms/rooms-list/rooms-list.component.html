@@ -1,7 +1,4 @@
 <app-header></app-header>
-<div class="filter">
-  <input type="number" placeholder="filter by price">
-</div>
 <table class="table">
   <tr class="text-center">
     <th>Even/odd</th>
@@ -14,7 +11,7 @@
     <th>Rating</th>
     <th>Select Room</th>
   </tr>
-  <tr class="text-center"  [ngClass]="e ? 'even': 'odd'" *ngFor="let room of rooms; let i = index; let o = odd; let e = even">
+  <tr class="text-center"  [ngClass]="e ? 'even': 'odd'" *ngFor="let room of rooms | filter:price ; let i = index; let o = odd; let e = even">
     <td>{{ e ? "even":"odd" }}</td>
     <td>{{ i }}</td>
     <td>{{ room.roomNumber }}</td>

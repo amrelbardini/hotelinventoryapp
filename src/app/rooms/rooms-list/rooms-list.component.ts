@@ -14,11 +14,12 @@ import { RoomList } from '../rooms.interface';
   selector: 'app-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush, // used when the change source of data is outside the component
+  // changeDetection: ChangeDetectionStrategy.OnPush, // used when the change source of data is outside the component
 })
 export class RoomsListComponent implements OnInit, OnChanges {
   @Input() rooms: RoomList[] = [];
   @Input() title: string = '';
+  @Input() price:number=0;
   @Output() selectedRoom = new EventEmitter<RoomList>();
   @Output() deletedRoom= new EventEmitter<number>();
 

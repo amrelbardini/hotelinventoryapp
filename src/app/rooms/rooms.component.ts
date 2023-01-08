@@ -11,8 +11,8 @@ import { Rooms, RoomList } from './rooms.interface';
 import { HeaderComponent } from './../header/header.component';
 import { RoomService } from './../room.service';
 import { Observable } from 'rxjs';
-import { HttpEventType,HttpClient } from '@angular/common/http';
-
+import { HttpEventType, HttpClient } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rooms',
@@ -30,11 +30,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     bookedRooms: 5,
     hotelRooms: 20,
   };
-// creating a stream and cashing the main data to be used, instead of calling the main data more than once
-//
-
-
-
+  // creating a stream and cashing the main data to be used, instead of calling the main data more than once
+  //
 
   stream = new Observable((observer) => {
     observer.next('user1');
@@ -42,11 +39,12 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     observer.next('user3');
     observer.complete();
   });
+ // new form control to input price filter value
+  priceFilter=new FormControl(0);
 
   roomlist: RoomList[] = [];
 
   selectedRoom!: RoomList;
-
 
   title: string = 'Room List';
   // static true property is added when it's safe to use that component in the ngOnInit of another component
@@ -76,12 +74,12 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     };
     //clone current list
     const rooms = this.roomlist;
-    const roomRemoved=rooms.filter(room=>room.roomNumber!==3);
-    const updatedRooms=[...roomRemoved,room];
+    const roomRemoved = rooms.filter((room) => room.roomNumber !== 3);
+    const updatedRooms = [...roomRemoved, room];
     console.log(updatedRooms);
-    this.roomService.UpdateRooms(updatedRooms).subscribe(data=>{this.roomlist=data;});
-
-
+    this.roomService.UpdateRooms(updatedRooms).subscribe((data) => {
+      this.roomlist = data;
+    });
   }
   addRoom() {
     const room: RoomList = {
@@ -103,16 +101,16 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   //delete room
   deleteRoom(id: number) {
-    const oldList=this.roomlist;
-    const newList=oldList.filter((room) => room.roomNumber !== id);
+    const oldList = this.roomlist;
+    const newList = oldList.filter((room) => room.roomNumber !== id);
     this.roomService.UpdateRooms(newList).subscribe((rooms) => {
-      this.roomlist=rooms;
+      this.roomlist = rooms;
       console.log('delete room is called from parent component');
     });
   }
-  totalBytes:number=0;
-  constructor(private roomService: RoomService,
-    private http:HttpClient) {}
+
+  totalBytes: number = 0;
+  constructor(private roomService: RoomService, private http: HttpClient) {}
   ngOnInit(): void {
     this.stream.subscribe({
       next: (value) => {
@@ -127,21 +125,20 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
     });
     //get photos using httprequest to access each event using type property
     this.roomService.getPhotos().subscribe((event) => {
-      switch(event.type){
-        case HttpEventType.Sent:{
+      switch (event.type) {
+        case HttpEventType.Sent: {
           console.log('request sent');
           break;
         }
-        case HttpEventType.ResponseHeader:{
+        case HttpEventType.ResponseHeader: {
           console.log('Request success!');
           break;
         }
-        case HttpEventType.DownloadProgress:{
-          this.totalBytes+=event.loaded;
+        case HttpEventType.DownloadProgress: {
+          this.totalBytes += event.loaded;
           console.log(this.totalBytes);
         }
       }
-
     });
   }
   ngAfterViewInit(): void {
