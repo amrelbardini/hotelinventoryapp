@@ -11,6 +11,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 
@@ -32,7 +35,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatExpansionModule,
     MatCheckboxModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
   providers:[
     MatDatepickerModule,

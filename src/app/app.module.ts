@@ -23,7 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailValidatorDirective } from './emailvalidator/email-validator.directive';
 import { HeaderModule } from './header/header.module';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 function initFactory(initService: InitService) {
   return () => initService.init();
@@ -41,27 +41,30 @@ function initFactory(initService: InitService) {
   ],
   imports: [
     BrowserModule,
-     AppRoutingModule,
-      NgbModule,
-       HttpClientModule,
-        BrowserAnimationsModule,
-         LayoutModule,
-          MatToolbarModule,
-           MatButtonModule,
-            MatSidenavModule,
-             MatIconModule,
-              MatListModule,
-              FormsModule,
-              HeaderModule
-            ],
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    FormsModule,
+    HeaderModule,
+    MatSnackBarModule,
+  ],
 
-
-
-
-providers: [
+  providers: [
     { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
-    { provide: APP_INITIALIZER, useFactory: initFactory,deps:[InitService], multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initFactory,
+      deps: [InitService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

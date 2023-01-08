@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
@@ -20,7 +21,8 @@ export class BookingComponent implements OnInit {
   }
 
 
-  constructor(private fb: FormBuilder,
+  constructor(
+              private fb: FormBuilder,
               private bookingService:BookingService,
               private route:ActivatedRoute
               ) {}
