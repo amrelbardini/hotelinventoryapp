@@ -1,0 +1,12 @@
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>POST TITLE</th>
+    <th>POST BODY</th>
+  </tr>
+  <tr *ngFor=" let comment of comments">
+    <td>{{comment.id}}</td>
+    <td>{{comment.title}}</td>
+    <td>{{comment.body}}</td>
+  </tr>
+</table>
